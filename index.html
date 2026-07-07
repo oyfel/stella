@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HUNTING YOU... 👁️</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: #ff0000;
+            color: #ffff00;
+            font-family: "Courier New", monospace;
+            animation: redFlash 0.5s infinite alternate;
+            cursor: crosshair;
+            overflow-x: hidden;
+        }
+
+        @keyframes redFlash {
+            0% { background-color: #ff0000; }
+            25% { background-color: #ffff00; }
+            50% { background-color: #800080; }
+            75% { background-color: #ffffff; }
+            100% { background-color: #ff0000; }
+        }
+
+        .container {
+            text-align: center;
+            padding: 2rem;
+            animation: shake 0.3s infinite;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px) rotate(-2deg); }
+            75% { transform: translateX(5px) rotate(2deg); }
+        }
+
+        h1 {
+            font-size: 4rem;
+            text-transform: uppercase;
+            color: #ff0000;
+            text-shadow: 
+                3px 3px 0 #ffff00,
+                -3px -3px 0 #008000,
+                5px -2px 0 #ffffff;
+            animation: glitch 0.1s infinite;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); text-shadow: none; filter: blur(0px); opacity: 1; }
+            5% { transform: translate(-2px, -3px); filter: blur(2px) hue-rotate(45deg); opacity: 0.8; background-color: #ffff00 !important;}
+            10% { transform: translate(3px, 1px); filter: blur(0px); opacity: 1; }
+            15% { transform: translate(-1px, -1px) skewX(2deg); background-color: #800080 !important;}
+            20% { transform: translate(4px, 3px); filter: blur(1px); opacity: 0.9; }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #ff4d00;
+            margin-top: 2rem;
+            text-transform: uppercase;
+            animation: pulse 0.8s infinite alternate;
+            position: relative;
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1); filter: blur(0px); border-radius: 50%; box-shadow: inset 0 0 30px #ff4d00, 0 -20px 60px rgba(255,77,0,0.8) !important;}
+            to { transform: scale(1.1); filter: blur(3px); border-radius: 30%; box-shadow: inset 0 0 40px #ff9900, 0 -30px 60px rgba(255,178,0,0.8) !important;}
+        }
+
+        .scare-box {
+            border: 3px dashed red;
+            padding: 1rem;
+            margin: 2rem auto;
+            background-color: black;
+            animation: blinkBorder 0.5s infinite alternate;
+            position: relative;
+        }
+
+        @keyframes blinkBorder {
+            from { border-color: #ff0000 !important;}
+            to { border-color: red !important;}
+        }
+
+        .hidden-msg {
+            font-size: 3rem;
+            color: white;
+            position: fixed;
+            opacity: 0.8;
+            pointer-events: none;
+            animation: floatUp 2s infinite ease-out forwards;
+            z-index: 1000 !important;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; background-color: #ffff00 !important;}
+            50% { transform: translateY(-30px) rotate(2deg); opacity: 0.8; background-color: red !important;}
+            100% { transform: translateY(-60px) rotate(4deg); opacity: 0.5; }
+        }
+
+        .jump-scare-hidden {
+            position: fixed;
+            top: -20%; left: -30%; right: auto !important; bottom: -20% !important;
+            width: 150%!important; height: 160%!important; z-index: 9999!important;
+        }
+
+        .ghost-face {
+            font-size: 8rem !important; color: white !important; animation: hauntLoop 3s infinite alternate !important;}
+
+        @keyframes hauntLoop { from { content: "👻"; background-color: #ffff00 !important;} to { content: "😈"; background-color: red !important;} }
+        
+        .click-warning {
+            font-size: 1.2rem; animation: textReveal 3s infinite alternate-reverse; cursor: pointer; padding: 5px;}
+
+        @keyframes textReveal { from { color: #ff0000; display: block !important;} to { color: #ffff00; background-color: red !important;} }
+        
+        .footer-horror {
+            position: fixed; bottom: -25%; left: 0; width: 100% !important; height: 30%!important; 
+            z-index: 9998!important; font-size: 4rem;color:red;background-color:black;border:none;padding-top:-5px;font-weight:bold;}
+
+        .sound-notice {
+            background-color:#ff0000;display:inline-block;margin:10px !important;animation:textShake 0.3s infinite;padding:2px;text-shadow: red 4px 4px 8px;border-radius:6px !important;}
+
+        @keyframes textShake {from{transform:translateX(0);}to{transform:translateX(-15px);}}
+        
+        .blink-eyes {font-size:3rem;color:black;margin-top:-2rem;padding-left:3rem;width:7.4em;height:3.8ex;}
+
+    </style>
+</head>
+<body onmouseover="triggerScare()" onclick="addFlash()">
+
+<div class="container">
+    <h1 id="mainText" contenteditable="true"></h1>
+    
+    <div style="margin-top: 2rem;">👁️ 👀 👁️<br><span style="font-size:0.8rem;animation:pulseText 5s infinite;color:black;font-weight:bold;text-shadow: red 4px 4px 6px !important;"></span></div>
+
+    <div id="subtitleContainer"></div>
+    
+    <div class="scare-box">
+        <p style="font-size:1.3rem;background-color:#ffff00;color:red;padding:5px;margin-top:-2rem;">💀⚡<br><span contenteditable="true" spellcheck="false"></span></p>
+
+        <script src='https://cdn.jsdelivr.net/gh/jumpprops/haunt_your_website@main/src/ghost.js'></script>\n\t\t\n```
+    
+    </div>
+
+    <h2 style="color:#ff0000;animation:blink 0.3s infinite;display:none;">👾 🖥️ 💿 ⌨️</h2>
+    <p contenteditable class="click-warning">...or click here to see what's watching you...</p>
+
+    <div id="subtitleContainer"></div>
+    
+<div style="margin-top: 3rem; padding: 1.5rem; background:black;">
+<span style="background-color:#ffff00;padding-left:2px;font-size:.9em">💾 💿</span><br>\n\t    <span contenteditable class="click-warning" spellcheck="false"></p>
+
+<h3 style="color:red;margin-top:-1.5rem;background:black;">🎵 <b>AUDIO WARNING:</b></h3>
+<p style="font-size:1rem;color:#ff9900;margin-left:2px;padding-right:8px;animation:textReveal 4s infinite alternate-reverse">
+</p><div class="hidden-msg"></p>\n\t    <span contenteditable class="jump-scare-hidden" id="jsScare"></h3>
+
+<div style="margin-top:-1.5rem;font-size:.9rem;color:red;padding-left:2px;">🔊 Click anywhere to unmute the abyss...</div><br>\n\t</div>
+        </span></p>
+
+<p contenteditable class="footer-horror"></h3><\n<div style="margin-top:-1.5rem;font-size:.9rem;color:#ff004d;padding-left:2px;">🎧 Click anywhere to unmute the abyss...</div>\n\t</div>
+        </span></p>
+
+<p contenteditable class="footer-horror"></h3><\n<div style="margin-top:-1.5rem;font-size:.9rem;color:#ff004d;padding-left:2px;">🎧 Click anywhere to unmute the abyss...</div>\n\t</div>
+        </span></p>
+
+<p contenteditable class="footer-horror"></h3><\n<div style="margin-top:-1.5rem;font-size:.9rem;color:#ff004d;padding-left:2px;">🎧 Click anywhere to unmute the abyss...</div>\n\t</div>
+        </span></p>
+
+    <script src='https://cdn.jsdelivr.net/gh/jumpprops/haunt_your_website@main/src/ghost.js'></h3>
+
+    <br><p contenteditable class="footer-horror" style="font-size:.8rem;color:#ff004d;padding-left:2px;">
+        👀 🧟‍♀️ 🔦 💡 ⏰ | 
+    </script>\n\t</div></span>
+
+<\n<script\nsrc='https://cdn.jsdelivr.net/gh/jumpprops/haunt_your_website@main/src/ghost.js'><\\h1 id="jsScare"></p><br><\n<div class="jump-scare-hidden" style="font-size:8rem;color:white;animation:glitch 0.2s infinite">
+<span contenteditable id="footer-horror">'https://cdn.jsdelivr.net/gh/jumpprops/haunt_your_website@main/src/ghost.js'></p>\n\t    <br><\\h1 id="jsScare"></span>
+
+<p style="margin-top:-2rem;font-size:3.5rem;color:red;">
+<span contenteditable class="hidden-msg">"It's you..."</span></h1>
+<div contenteditable='class="jump-scare-hidden"' font-size:"8rem;";color:white;"animation:glitch 0.2s infinite">'👁️‍🗨️ 💀 🧠 👣 😱 💔'</div><br>
+\    <p style="margin-top:-1.5rem;font-size:.9rem;color:#ff004d;padding-left:2px;">⚡ CLICK ANYWHERE TO UNMUTE THE ABYSS... ⚡</span></h3>
+
+<div class="jump-scare-hidden" id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror" style='font-size:.8rem;contenteditable color="#ff004d";padding-left:"2px">
+    👀 🧟‍♀️ 🔦 💡 ⏰ | 
+</div><br>
+
+<p contenteditable class="click-warning"></h3>"It's you..."<span id="footer-horror
