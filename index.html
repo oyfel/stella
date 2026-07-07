@@ -2,153 +2,58 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>👁️ MICHIELLE LI 🧟‍♀️ 👀</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message for Michelle</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
         body {
-            background-color: #ff0000 !important;
-            color: #ffff00 !important;
-            font-family: "Courier New", monospace !important;
-            animation: redFlash 0.3s infinite alternate !important;
-            cursor: crosshair !important;
-            overflow-x: hidden !important;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
-
-        @keyframes redFlash {
-            0% { background-color: #ff0000; content:""; }
-            25% { background-color: #ffff00; filter:brightness(1.3);filter:hue-rotate(45deg);}
-            50% { background-color: #800080; content:"!"; color:white;}
-            75% { background-color: #ffffff !important; transform:scale(1.02)skewX(-3deg);}
-            100% { background-color: #ff0000; filter:brightness(0.8); }
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
-
-        .main-container {
-            text-align: center !important;
-            padding: 5rem !important;
-            animation: shake 0.2s infinite alternate-reverse !important;
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
         }
-
-        @keyframes shake {
-            from, to { transform: translateX(0) rotate(0); filter:brightness(1);}
-            34% { transform: translateX(-8px) rotate(-5deg); color:#ff6600;}
-            67% { transform: translateX(8px) rotate(5deg); content:"!"!color:red;filter:hue-rotate(25);}
+        p {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+            margin-top: 0;
         }
-
-        h1#mainTitle {
-            font-size: 4.5rem !important;
-            text-transform: uppercase !important;
-            color: #ff0000 !important;
-            text-shadow: 
-                3px 3px 0 #ffff00, -2px 2px 1em#800080 !important;
-            animation: glitchText 0.1s infinite alternate-reverse !important;
+        .btn {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.75rem 1.5rem;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.2s;
         }
-
-        @keyframes glitchText {
-            0%, 95% { transform: translate(0); text-shadow:none;filter:brightness(1);}
-            23% { transform:translate(-4px,-2px)skewX(8deg)!color:#ffff00;font-size:5rem;}
-            67% { transform:translate(5px,1px)skeWx(-9deg);filter:hue-rotate(35);}
+        .btn:hover {
+            background-color: #2980b9;
         }
-
-        .subtitle-container div#subText {
-            font-size: 2.8rem !important;
-            color: #ff4d00 !important;
-            margin-top: 2rem !important;
-            text-transform: uppercase !important;
-            animation: pulseSubtitle 1s infinite alternate-reverse !important;
-        }
-
-        @keyframes pulseSubtitle { from, to{transform:scale(1);filter:brightness(0.9);} 34%{content:"⚡";color:red;font-size:2rem;} 58%{transform:scale(1.1)rotate(-3deg)!font-weight:bold!color:#ffcc00;}}
-
-        .scare-box {
-            border: 5px dashed red !important;
-            padding: 2rem !important;
-            margin: 2rem auto !important;
-            background-color:black!important;width:min-content;height:auto;margin-left:-1em;border-radius:8px!animation:borderGlow 0.4s infinite alternate-reverse;}
-
-        @keyframes borderGlow{from{border-color:red !important;text-shadow:inset red 5px 5px;filter:brightness(2);}to{border-color:#ff66cc;color:white!important;border-width:3em!background:black}}
-
-        .hidden-msg { font-size:4rem;padding-left:-1.7ex;font-style:bold;margin-top:-0.8ex;background:red !important;}
-        
-        @keyframes floatUp {from, to{transform:translateY(0);opacity:1;content:"👁️";color:white} 50%{transform:translate(-2em,-40px)rotate(3deg);} }
-
-        .jump-scare-hidden { position:fixed;top:-18%;left:-26%!width:170%!height:auto;z-index:999 !important;font-size:10rem;color:black;}
-        
-        @keyframes hauntLoop{from, to{content:"👻";color:white;transform:none} 5%{background:#ffff00!important;padding-right:-2.3ex}to {font-family:cursive;background:red!important}}
-
-        .click-warning#warningText { font-size:1.6rem;margin-top:-1.8em !important ;padding:5px !important;color:#ff99cc;cursor:pointer;display:block;animation:textReveal 4s infinite alternate-reverse;}
-        
-        @keyframes textReveal{from{color:red!display:inline!important;border-bottom:none}to {color:#ffff00;background:black;font-weight:bold;padding-right:2ex;margin-left:-1.3em}}
-
-        .footer-horror#bottomFooter {position:fixed;bottom:-45%;left:auto;width:18%!height:auto !important;z-index:9997 !important;font-size:6rem;color:red;background:black;border:none;padding-top:-2px;font-weight:bold!}
-        
-        @keyframes textShake{from, to{transform:translateX(0);}to {transform:translate(-35px)!;}}
-
-        .blink-eyes#eyeContainer {font-size:1.9rem;color:#ffff66;margin-top:-2em !important;padding-left:4ex;width:8.7em;height:auto;}
     </style>
 </head>
-<body onmouseover="triggerScare()" onclick="addFlash()">
+<body>
 
-<div class="main-container">
-    <h1 id="mainTitle" contenteditable="true"></h1>
-    
-    <div style="margin-top: 3rem; animation:pulseText 6s infinite;color:black;font-weight:bold;text-shadow:red 5px 5px 8px !important;">👁️ 👀 👁️</div>
-
-    <div id="subtitleContainer"></div>
-    
-<div class="scare-box">
-<p style="font-size:1.7rem;background:#ffff00;color:black;padding:3px;margin-top:-2rem;font-weight:bold !important;">💀⚡<br><span contenteditable spellcheck="false"></p></span>
-
-<script src='https://cdn.jsdelivr.net/gh/jumpprops/haunt_your_website@main/src/ghost.js'></h1>\n\t</div><\script>
-    
+    <div class="container">
+        <h1>Michelle Li</h1>
+        <p>Go back to work! 💼</p>
+        <a href="#" class="btn" onclick="alert('Seriously, those emails won\'t answer themselves!')">Acknowledged</a>
     </div>
 
-<h2 style="color:red !important;margin-top:-1.5rem;background:black;font-size:3rem;animation:blink 0.4s infinite;display:none;">👾 🖥️ 💿 ⌨️💻</h2>
-
-<p contenteditable class="click-warning" id="warningText"></p><\span spellcheck="false">
-...or click anywhere to see what's watching you back...</h1>\n\t    <div id="subtitleContainer"><br><\\<script src='https://cdn.jsdelivr.net/gh/jumpprops/haunt_your_website@main/src/ghost.js'></p>
-
-<h3 style="color:red;margin-top:-2rem;background:black;font-size:4.8rem;animation:textReveal 5s infinite alternate-reverse;">🎵 <b>AUDIO WARNING:</b></h3>\n\t</div><\
-\n<div class="hidden-msg"></span>
-
-<p contenteditable id="footer-horror" style='font-size:.9em !important;color:#ff006e;padding-left:2ex;margin-top:-1.8rem;background:red'>🎧 Click anywhere to unmute the abyss... 🔊<br></h3>\n\t</div>
-        </span>
-
-<p contenteditable id="bottomFooter" style='font-size:.75em !important;color:#ff004d;padding-left:2.8ex;margin-top:-1.6rem;animation:textShake 3s infinite'>👀 🧟‍♀️ 🔦 💡 ⏰ | 👁️ 🕳️💿😱<br>\n<div style="margin-top:-0.5em;font-size:2rem;color:#ff99cc;padding-left:1ex;background:black;">⚠ CLICK ANYWHERE TO UNMUTE THE ABYSS ... ⚠</div><\
-\n<script src='https://cdn.jsdelivr.net/gh/jumpprops/haunt_your_website@main/src/ghost.js'>\n\t    <br>\n<\\h3 id="jsScare"></span></p>
-
-<p style="margin-top:-2.8rem;font-size:4em !important;color:#ffff00;background:black;">
-<span contenteditable class="hidden-msg">"It's you..."</span><\h1>
-
-<div contenteditable='id="footer-horror"'font-size:"9rem;"color:white;animation:glitch 0.2s infinite">'👁️‍🗨️ 💀 🧠 👣 😱 💔'</div><br>
-\    <p style="margin-top:-1.5em;font-size:.86rem !important;color:#ff4d89;padding-left:3px;background:red'>⚡ CLICK ANYWHERE TO UNMUTE THE ABYSS... ⚠</span></h3>
-
-<div id="footer-horror" style='font-size:.75em ;contenteditable color="#cc006e";padding:"2.1ex;margin-top:-1.4rem;background:red'>
-    👀 🧟‍♀️ 🔦 💡 ⏰ | 
-</div><br>
-
-<span contenteditable id="bottomFooter"></p><\\h3"style='font-size:.8em !important;color:#ff006e;padding:"2.1ex;margin-top:-1.4rem;background:red">
-    👀 🧟‍♀️ 🔦 💡 ⏰ | 
-</span></p>
-
-<span contenteditable class="click-warning" id="warningText"></h3>"It's you..."<\span id="footer-horror'font-size:.75em !important;color:"#ff99cc;padding:2.1ex;margin-top:-1.4rem;background:red">
-    👀 🧟‍♀️ 🔦 💡 ⏰ | 
-</div><br>
-
-<span contenteditable class="click-warning" id="warningText"></h3>"It's you..."<\span id="footer-horror'font-size:.75em !important;color:"#ff99cc;padding:2.1ex;margin-top:-1.4rem;background:red">
-    👀 🧟‍♀️ 🔦 💡 ⏰ | 
-</div><br>
-
-<span contenteditable class="click-warning" id="warningText"></h3>"It's you..."<\span id="footer-horror'font-size:.75em !important;color:"#ff99cc;padding:2.1ex;margin-top:-1.4rem;background:red">
-    👀 🧟‍♀️ 🔦 💡 ⏰ | 
-</div><br>
-
-<span contenteditable class="click-warning" id="warningText"></h3>"It's you..."<\span id="footer-horror'font-size:.75em !important;color:"#ff99cc;padding:2.1ex;margin-top:-1.4rem;background:red">
-    👀 🧟‍♀️ 🔦 💡 ⏰ | 
-</div><br>
-
-<span contenteditable class="click-warning" id="warningText"></h3>"It's you..."<\span id="footer-horror'font-size:.75em !important;color:"#ff99cc;padding:2.1ex;margin-top:-1.4rem;background:red">
-    👀 🧟‍♀️ 🔦 💡 ⏰ | 
-</div><br>
-
-<span contenteditable class="click-warning" id="warningText"></h3>"It's you..."<\span id="footer-horror
+</body>
+</html>
