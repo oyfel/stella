@@ -3,56 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Message for Michelle</title>
+    <title>THEY ARE WATCHING</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f6;
+            background-color: #050505;
+            color: #ff3333;
+            font-family: 'Courier New', Courier, monospace;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            overflow: hidden;
+            background-image: radial-gradient(circle, #1a0000 10%, #000000 100%);
         }
+
         .container {
             text-align: center;
-            background-color: #ffffff;
-            padding: 3rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
+
         h1 {
-            color: #2c3e50;
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+            font-size: 3.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5rem;
+            margin-bottom: 10px;
+            animation: glitch 1s linear infinite;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
         }
-        p {
-            color: #7f8c8d;
-            font-size: 1.2rem;
-            margin-top: 0;
+
+        h2 {
+            font-size: 2rem;
+            color: #ffffff;
+            letter-spacing: 0.2rem;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+            opacity: 0.8;
+            animation: flicker 2s infinite alternate;
         }
-        .btn {
-            display: inline-block;
-            margin-top: 1.5rem;
-            padding: 0.75rem 1.5rem;
-            background-color: #3498db;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background-color 0.2s;
+
+        /* Scanline Overlay effect */
+        body::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 4px, 6px 100%;
+            pointer-events: none;
         }
-        .btn:hover {
-            background-color: #2980b9;
+
+        /* Glitch Effect */
+        @keyframes glitch {
+            0% {
+                text-shadow: 2px 3px 0 #550000, -2px -3px 0 #000;
+                transform: translate(0px, 0px);
+            }
+            15% {
+                text-shadow: 4px -2px 0 #ff0000, -3px 2px 0 #111;
+                transform: translate(-2px, 1px);
+            }
+            30% {
+                text-shadow: -3px 3px 0 #aa0000, 2px -2px 0 #222;
+                transform: translate(2px, -1px);
+            }
+            45% {
+                text-shadow: 1px -3px 0 #ff3333, -1px 3px 0 #000;
+                transform: translate(-1px, -2px);
+            }
+            60% {
+                text-shadow: 3px 2px 0 #770000, -2px -1px 0 #333;
+                transform: translate(1px, 2px);
+            }
+            100% {
+                text-shadow: 2px -2px 0 #ff0000, -1px 2px 0 #000;
+                transform: translate(0px, 0px);
+            }
+        }
+
+        /* Flickering Text Effect */
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                opacity: 0.9;
+            }
+            20%, 24%, 55% {
+                opacity: 0.2;
+                text-shadow: none;
+            }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Michelle Li</h1>
-        <p>Go back to work! 💼</p>
-        <a href="#" class="btn" onclick="alert('Seriously, those emails won\'t answer themselves!')">Acknowledged</a>
+        <h1>MICHELLE LI</h1>
+        <h2>GO BACK TO WORK.</h2>
     </div>
 
 </body>
